@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(Role::class)
                 ->nullable()
                 ->constrained() // Voegt een foreign key constraint toe
-                ->cascadeOnDelete(); // Verwijdert users wanneer een Role verwijdert wordt
+                ->cascadeOnDelete(); // Verwijdert users wanneer een Role verwijderd wordt
             //$table->foreignId('role_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('email')->unique();

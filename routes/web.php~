@@ -8,7 +8,8 @@ Route::get('/', function () {
     return view('frontend.home');
 });
 
-Route::resource('.backend.users', UserController::class);
+Route::resource('/backend/users', UserController::class);
+//Route::resource('/backend/posts', PostController::class);
 
 Route::get('/dashboard', function () {
     return view('backend.dashboard');

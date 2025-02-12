@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/backend/users', UserController::class);
+Route::resource('/backend/posts', PostController::class);
 
 Route::get('/dashboard', function () {
     return view('backend.dashboard');

@@ -2,7 +2,7 @@
 
 @foreach($posts as $post)
     <ul>
-        <li>{{$post->user->name}}</li>
+        <li>{{$post->user_id->name}}</li>
         <h2>
             {{$post->title}}
         </h2>
