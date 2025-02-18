@@ -17,6 +17,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
     Route::resource('/users', UserController::class);
     Route::resource('/posts', PostController::class);
+    Route::patch('/users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
 });
 
 Route::get('/backend', function () {

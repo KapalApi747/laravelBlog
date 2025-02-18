@@ -20,6 +20,9 @@
                         class="form-control"
                         value="{{old('name')}}"
                     >
+                    @error('name')
+                    <p class="text-danger text-sm">{{$message}}</p>
+                    @enderror
                 </div>
                 <div class="form-group mt-3">
                     <label for="email">Email:</label>
@@ -31,8 +34,9 @@
                     >
                 </div>
                 <div class="form-group mt-3">
-                    <label for="role_id">Select Role:</label>
-                    <select class="form-select" name="role_id" id="role_id">
+                    <label for="role_id">Select Role: (ctrl + click to select multiple)</label>
+                    <select class="form-select" name="role_id" id="role_id" multiple>
+                        <option value="" disabled>Select Role</option>
                         @foreach($roles as $id => $role)
                             <option value="{{$id}}">{{$role}}</option>
                         @endforeach

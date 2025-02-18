@@ -34,8 +34,9 @@
                     >
                 </div>
                 <div class="form-group mt-3">
-                    <label for="role_id">Select Role:</label>
-                    <select class="form-select" name="role_id" id="role_id">
+                    <label for="role_id">Select Role: (ctrl + click to select multiple)</label>
+                    <select class="form-select" name="role_id[]" id="role_id" multiple>
+                        <option value="" disabled>Select Role</option>
                         @foreach($roles as $id => $role)
                             <option value="{{$id}}">{{$role}}</option>
                         @endforeach

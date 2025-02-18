@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Photo;
 use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,19 +15,15 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Role::class)
-                ->nullable()
-                ->constrained() // Voegt een foreign key constraint toe
-                ->cascadeOnDelete(); // Verwijdert users wanneer een Role verwijderd wordt
-            //$table->foreignId('role_id')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Photo::class)->nullable()->constrained()->nullOnDelete();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('is_active')->default(0);
-            $table->string('photo_id')->default('');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

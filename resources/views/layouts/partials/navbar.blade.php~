@@ -17,7 +17,7 @@
         <li class="nav-item dropdown">
             @auth
                 @php
-                    $currentUser = Auth::user();
+                    use Illuminate\Support\Facades\Auth;$currentUser = Auth::user();
                 @endphp
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                    aria-expanded="false">

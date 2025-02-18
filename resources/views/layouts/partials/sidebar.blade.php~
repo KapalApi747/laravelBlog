@@ -14,8 +14,8 @@
             </a>
             <div class="collapse" id="collapseUsers" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="{{ route('users.index') }}">View Users</a>
-                    <a class="nav-link" href="{{ route('users.create') }}">Create New User</a>
+                    <a class="nav-link" href="{{ route('users.index') }}">Static Navigation</a>
+                    <a class="nav-link" href="{{ route('users.create') }}">Light Sidenav</a>
                 </nav>
             </div>
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
