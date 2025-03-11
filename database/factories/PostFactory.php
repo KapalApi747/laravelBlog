@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Photo;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -17,11 +19,15 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $title = $this->faker->sentence();
+
         return [
-            'user_id' => User::inRandomOrder()->first()->id ?? 1,
-            'title' => fake()->words(3, true),
-            'photo_id' => 1,
-            'body' => fake()->paragraphs(3, true),
+            'author_id' => User::inRandomOrder()->first()->id ?? User::factory(),
+            'photo_id' => Photo::inRandomOrder()->first()->id ?? null,
+            'title' => $title,
+            'content' => $this->faker->paragraphs(3, true),
+            'slug' => Str::slug($title),
+            'is_published' => 1,
         ];
     }
 }

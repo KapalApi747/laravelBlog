@@ -2,7 +2,7 @@
     <div class="sb-sidenav-menu">
         <div class="nav">
             <div class="sb-sidenav-menu-heading">Core</div>
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{ route('backendindex') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Dashboard
             </a>
@@ -16,6 +16,17 @@
                 <nav class="sb-sidenav-menu-nested nav">
                     <a class="nav-link" href="{{ route('users.index') }}">View Users</a>
                     <a class="nav-link" href="{{ route('users.create') }}">Create New User</a>
+                </nav>
+            </div>
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePosts" aria-expanded="false" aria-controls="collapsePosts">
+                <div class="sb-nav-link-icon"><i class="fas fa-newspaper"></i></div>
+                Posts
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapsePosts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ route('posts.index') }}">View Posts</a>
+                    <a class="nav-link" href="{{ route('posts.create') }}">Create New Post</a>
                 </nav>
             </div>
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

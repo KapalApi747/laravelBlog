@@ -1,33 +1,84 @@
 @extends('layouts.backend')
-@section('title')
-    Users
+@section('title', 'Users')
+@section('breadcrumb')
+    @include('layouts.partials.breadcrumbs')
 @endsection
 @section('charts')
 @endsection
+@section('cards')
+    @include('layouts.partials.cards')
+@endsection
 @section('content')
+    @yield('cards')
     @if(session('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('message') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3">Users Beheer</h1>
+        @can('create', App\Models\Post::class)
+            <a href="{{ route('users.create') }}" class="btn btn-primary">Nieuwe User</a>
+        @endcan
+    </div>
+
+    <form method="GET" action="{{route('users.index')}}" class="mb-3">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <i class="fas fa-filter"></i> Filter Users
+            </div>
+            <div class="card-body">
+                <form method="GET" action="{{route('users.index')}}">
+                    <div class="row g-3">
+                        <!--Zoekveld-->
+                        <div class="col-md-4">
+                            <label for="search" class="form-label fw-bold">
+                                Search by Name
+                            </label>
+                            <input
+                                type="text"
+                                name="search"
+                                id="search"
+                                class="form-control"
+                                placeholder="Enter User..."
+                                value="{{request('search')}}"
+                            >
+                        </div>
+                        {{--Filter en Reset Knop--}}
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary me-2">
+                                <i class="fas fa-filter"></i> Filter
+                            </button>
+                            <a href="{{ route('users.index') }}" class="btn btn-secondary">
+                                <i class="fas fa-sync-alt"></i> Reset
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </form>
+
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
             All Users
         </div>
         <div class="card-body">
+            <p class="text-muted">Showing {{ $users->total() > 0 ? $users->count() : 0 }} of {{ $users->total() }} users</p>
             <table class="table table-striped rounded shadow drop-shadow-2xl">
                 <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>@sortablelink('id', 'Id')</th>
                     <th>Photo</th>
-                    <th>Name</th>
-                    <th>Email</th>
+                    <th>@sortablelink('name', 'Name')</th>
+                    <th>@sortablelink('email', 'Email')</th>
                     <th>Role</th>
-                    <th>Active</th>
-                    <th>Created</th>
-                    <th>Updated</th>
+                    <th>@sortablelink('is_active', 'Active')</th>
+                    <th>@sortablelink('created_at', 'Created')</th>
+                    <th>@sortablelink('updated_at', 'Updated')</th>
                     <th>Deleted</th>
                     <th>Actions</th>
                 </tr>
@@ -140,9 +191,7 @@
                 @endif
                 </tbody>
             </table>
-            <div>
-                {{$users->links()}}
-            </div>
+            {!! $users->appends(request()->except('page'))->render() !!}
         </div>
     </div>
 

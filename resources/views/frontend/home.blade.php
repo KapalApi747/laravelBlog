@@ -9,6 +9,8 @@
 </head>
 <body>
     <h1>Hello Laravel!</h1>
-
+    @can('viewAdminPanel', App\Models\User::class)
+        <a href="{{ route('backendindex') }}">Admin Dashboard</a>
+    @endcan
 </body>
 </html>

@@ -10,12 +10,12 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Dashboard - @yield('title')</h1>
+                <h1 class="mt-4">@yield('title', 'Dashboard')</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">@yield('title')</li>
+                    @yield('breadcrumb')
                 </ol>
-                @yield('cards', View::make('layouts.partials.cards'))
-                @yield('charts', View::make('layouts.partials.charts'))
+                {{--               @yield('cards', View::make('layouts.partials.cards'))--}}
+                {{--               @yield('charts', View::make('layouts.partials.charts'))--}}
                 @yield('content')
             </div>
         </main>
@@ -29,5 +29,13 @@
 <script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
+
+<script>
+    //10 seconden de alert laten staan
+    window.setTimeout(function(){
+        document.querySelector(".alert").style.display='none';
+    },10000);
+</script>
+
 </body>
 </html>
