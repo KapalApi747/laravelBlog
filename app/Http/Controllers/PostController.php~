@@ -51,6 +51,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+        dd($request);
         $validated = $request->validated();
 
         $validated['slug'] = Str::slug($validated['title']);

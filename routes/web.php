@@ -15,12 +15,21 @@ Route::get('/contact', [ContactController::class, 'create'])->name('contact.crea
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'verified', 'admin']], function () {
+    // Users
     Route::resource('/users', UserController::class);
     Route::patch('/users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
 
+    // Categories
     Route::resource('/categories', CategoryController::class);
     Route::patch('/categories/{id}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
     Route::delete('/categories/{id}/forceDelete', [CategoryController::class, 'forceDelete'])->name('categories.forceDelete');
+
+    // Notifications
+    Route::patch('/notifications/{id}/read', function ($id) {
+        $notification = auth()->user()->notifications()->findOrFail($id);
+        $notification->markAsRead();
+        return back()->with('message', 'Notification marked as read.');
+    })->name('notifications.markAsRead');
 });
 
 Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'verified']], function () {

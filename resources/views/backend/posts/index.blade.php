@@ -10,12 +10,41 @@
 @endsection
 @section('content')
     @yield('cards')
-    {{--@include('layouts.partials.flash_message')--}}
+    @include('layouts.partials.flash_message')
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h3">Posts Beheer</h1>
         @can('create', App\Models\Post::class)
             <a href="{{ route('posts.create') }}" class="btn btn-primary">Nieuwe Post</a>
         @endcan
+    </div>
+
+    <!-- Notificaties -->
+    <div class="mb-3">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <i class="fas fa-bell"></i> Notifications
+            </div>
+            <div class="card-body">
+                @if(auth()->user()->unreadNotifications->count() > 0)
+                    <ul class="list-group">
+                        @foreach(auth()->user()->unreadNotifications as $notification)
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <a href="{{ $notification->data['url'] }}">
+                                    New post: <strong>{{ $notification->data['title'] }}</strong> by {{ $notification->data['author'] }}
+                                </a>
+                                <form method="POST" action="{{ route('notifications.markAsRead', $notification->id) }}">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="btn btn-sm btn-secondary">Mark as Read</button>
+                                </form>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p class="text-muted">No new notifications.</p>
+                @endif
+            </div>
+        </div>
     </div>
 
     <form method="GET" action="{{route('posts.index')}}" class="mb-3">

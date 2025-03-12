@@ -17,7 +17,7 @@ class UpdatePostRequest extends FormRequest
             'author_id' => 'nullable|exists:users,id',
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'slug' => ['nullable', 'string', 'max:255', Rule::unique('posts', 'slug')->ignore($this->post->id)],
+            'slug' => ['nullable', 'string', 'max:255', Rule::unique('posts', 'slug')->ignore($this->route('post'))],
             'photo_id' => 'nullable|image|max:2048',
             'is_published' => 'boolean',
             'categories' => 'array|required',

@@ -66,6 +66,10 @@ class User extends Authenticatable
         return $this->roles()->where('name', $role)->exists();
     }
 
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
+
     public function scopeFilter($query, $searchterm) {
         if(!empty($searchterm)) {
             $query->where(function($q) use ($searchterm) {

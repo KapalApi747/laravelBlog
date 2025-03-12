@@ -23,8 +23,9 @@ class UpdateUserRequest extends UserRequest
     {
         // Verkrijg het id van de huidige gebruiker via route model binding of route parameter
         //$userId = $this->route('user') ? $this->route('user')->id : $this->route('id');
+        dd($this->route('user'));
         return array_merge(parent::rules(), [
-            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->route('user'))],
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->route('user')->id)],
             'password' => 'nullable|min:6',
         ]);
     }
